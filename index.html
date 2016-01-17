@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Human-Level Control Through Deep Reinforcement Learning</title>
+    <meta name="description" content="Presentation on Human-Level Control Through Deep Reinforcement Learning">
+    <meta name="author" content="Kai Arulkumaran">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/3.2.0/css/reveal.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/3.2.0/css/theme/black.min.css" id="theme">
+    <!-- Code syntax highlighting -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/3.2.0/lib/css/zenburn.min.css">
+    <!-- Printing and PDF exports -->
+    <script>
+      var link = document.createElement('link');
+      link.rel = 'stylesheet';
+      link.type = 'text/css';
+      link.href = window.location.search.match(/print-pdf/gi) ? 'https://cdnjs.cloudflare.com/ajax/libs/reveal.js/3.2.0/css/print/pdf.min.css' : 'https://cdnjs.cloudflare.com/ajax/libs/reveal.js/3.2.0/css/print/paper.min.css';
+      document.getElementsByTagName('head')[0].appendChild(link);
+    </script>
+  </head>
+
+  <body>
+    <div class="reveal">
+      <div class="slides">
+        <section data-background-video="seaquest.mp4" data-background-video-loop data-background-color="#000000">
+          <div style="background-color: rgba(0, 0, 100, 0.8); padding: 40px;">
+            <h2 style="font-size: 1.5em;">Human-Level Control Through Deep Reinforcement Learning</h2>
+            <p style="font-size: 0.7em;">V. Mnih, K. Kavukcuoglu,	D. Silver,	A. A. Rusu,	J. Veness, M. G. Bellemare,	A. Graves, M. Riedmiller,	A. K. Fidjeland, G. Ostrovski, S. Petersen,	C. Beattie, A. Sadik, I. Antonoglou, H. King, D. Kumaran, D. Wierstra,	S. Legg &amp; D. Hassabis</p>
+            <p style="font-size: 0.8em;">Presented by <a href="http://kaixhin.com">Kai Arulkumaran</a> / <a href="https://twitter.com/KaiLashArul">@KaiLashArul</a></p>
+          </div>
+        </section>
+
+        <section>
+          <section>
+            <h2>Vertical Slides</h2>
+            <p>Slides can be nested inside of each other.</p>
+          </section>
+          <section>
+            <h2>Basement Level 1</h2>
+            <p>Nested slides are useful for adding additional detail underneath a high level horizontal slide.</p>
+          </section>
+        </section>
+
+        <section>
+          <section id="fragments">
+            <h2>Fragments</h2>
+            <p>Hit the next arrow...</p>
+            <p class="fragment">... to step through ...</p>
+            <p><span class="fragment">... a</span> <span class="fragment">fragmented</span> <span class="fragment">slide.</span></p>
+
+            <aside class="notes">
+              This slide has fragments which are also stepped through in the notes window.
+            </aside>
+          </section>
+          <section>
+            <h2>Fragment Styles</h2>
+            <p>There's different types of fragments, like:</p>
+            <p class="fragment grow">grow</p>
+            <p class="fragment shrink">shrink</p>
+            <p class="fragment fade-out">fade-out</p>
+            <p class="fragment current-visible">current-visible</p>
+            <p class="fragment highlight-red">highlight-red</p>
+            <p class="fragment highlight-blue">highlight-blue</p>
+          </section>
+        </section>
+
+        <section>
+          <h2>References</h2>
+          <ol>
+            <li>Nature</li>
+            <li>blah</li>
+            <li>blah</li>
+            <li>blah</li>
+            <li>blah</li>
+          </ol>
+
+          <p>All images/videos © Atari, Inc. and Google DeepMind</p>
+        </section>
+      </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/3.2.0/lib/js/head.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/3.2.0/js/reveal.min.js"></script>
+    <script>
+      Reveal.initialize({
+        controls: true,
+        progress: true,
+        history: true,
+        center: true,
+        transition: 'slide', // none/fade/slide/convex/concave/zoom
+        // reveal.js plugins
+        dependencies: [
+          // Syntax highlight for <code> elements
+          { src: 'https://cdnjs.cloudflare.com/ajax/libs/reveal.js/3.2.0/plugin/highlight/highlight.min.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+          // MathJax
+          { src: 'https://cdnjs.cloudflare.com/ajax/libs/reveal.js/3.2.0/plugin/math/math.min.js', async: true }
+        ]
+      });
+    </script>
+  </body>
+</html>
