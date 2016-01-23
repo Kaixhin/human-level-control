@@ -48,14 +48,14 @@
           <p>Reward is often sparse and delayed</p>
           <p>Formulation: Set of states $S$ and set of actions $A$</p>
           <p>Policy $\pi$ determines action $\mathbf{a}_t$ to perform given the state $\mathbf{s}_t$</p>
-          <p>Action $\mathbf{a}_t$ transitions $\mathbf{s}_t$ to $\mathbf{s}_{t+1}$ with scalar reward $r_t$</p>
+          <p>Action $\mathbf{a}_t$ transitions $\mathbf{s}_t$ to $\mathbf{s}_{t+1}$ with scalar reward $r_{t+1}$</p>
         </section>
 
         <section>
           <h3>Reinforcement Learning 2/2</h3>
-          <p>The following requires eventual termination (<em>episodicity</em>)</p>
+          <p>Problem may terminate (<em>episodic</em>), or not ($T = \infty$)</p>
           <p>Cumulative reward is called the return $R = \sum\limits_{t=1}^T \gamma^{t-1}r_t$</p>
-          <p>Discount $\gamma$ in $[0, 1]$ makes future events less important</p>
+          <p>Discount $\gamma$ in $[0, 1)$ makes future events less important</p>
           <p>Goal: Maximise expected return given policy $\mathbb{E}[R|\pi]$</p>
         </section>
 
@@ -72,7 +72,7 @@
           <h3>Q-Learning 2/2</h3>
           <p>Update rule: $Q_{t+1}(\mathbf{s}_t, \mathbf{a}_t) = Q_t(\mathbf{s}_t, \mathbf{a}_t) + \alpha \delta$</p>
           <p>Temporal difference error $\delta = Y - Q_t$;<br>difference between a target $Y$ and current value of $Q$</p>
-          <p>Target $Y = r_t + \gamma\max\limits_{\mathbf{a}}Q_t(\mathbf{s}_{t+1}, \mathbf{a})$;<br>reward received plus $\max$ discounted estimated Q-value</p>
+          <p>Target $Y = r_{t+1} + \gamma\max\limits_{\mathbf{a}}Q_t(\mathbf{s}_{t+1}, \mathbf{a})$;<br>reward received plus $\max$ discounted estimated Q-value</p>
           <p>Reminder: $\max$ estimated Q-value is $V(\mathbf{s}_{t+1})$</p>
         </section>
 
@@ -105,7 +105,7 @@
         <section>
           <h3>Experience Replay</h3>
           <p>"Neuro-inspired" mechanism for replaying memories</p>
-          <p>Store $(\mathbf{s}_t, a_t, r_t, \mathbf{s}_{t+1})$ transitions in a (circular) buffer</p>
+          <p>Store $(\mathbf{s}_t, a_t, r_{t+1}, \mathbf{s}_{t+1})$ transitions in a (circular) buffer</p>
           <p>Uniformly sample and perform Q-learning</p>
           <p>Data-efficient and can use minibatch updates</p>
           <p>Breaks strong temporal correlations from sampling online</p>
@@ -116,8 +116,8 @@
           <p>Policy network acts, but target network estimates $V(\mathbf{s}_{t+1})$</p>
           <p>Better estimate if policy network picks $\arg\!\max$ action</p>
           <p>Target network then estimates value with chosen action</p>
-          <p>$Y_{DQN} = r_t + \gamma Q(\mathbf{s}_{t+1}, \arg\!\max\limits_a[Q(\mathbf{s}_{t+1}, a; \theta_{target})]; \theta_{target})$</p>
-          <p>$Y_{DDQN} = r_t + \gamma Q(\mathbf{s}_{t+1}, \arg\!\max\limits_a[Q(\mathbf{s}_{t+1}, a; \theta_{policy})]; \theta_{target})$</p>
+          <p>$Y_{DQN} = r_{t+1} + \gamma Q(\mathbf{s}_{t+1}, \arg\!\max\limits_a[Q(\mathbf{s}_{t+1}, a; \theta_{target})]; \theta_{target})$</p>
+          <p>$Y_{DDQN} = r_{t+1} + \gamma Q(\mathbf{s}_{t+1}, \arg\!\max\limits_a[Q(\mathbf{s}_{t+1}, a; \theta_{policy})]; \theta_{target})$</p>
         </section>
 
         <section>
