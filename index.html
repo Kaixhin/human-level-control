@@ -34,27 +34,27 @@
 
         <section>
           <h3>Summary</h3>
-          <p>RL + Q-learning</p>
-          <p>Deep Q-networks</p>
-          <p>Experience replay memory</p>
-          <p>Double Q-learning</p>
-          <p>Dueling network architectures</p>
+          <p>Reinforcement Learning</p>
+          <p>Deep Q-Networks</p>
+          <p>Improvements</p>
         </section>
 
         <section>
           <h3>Reinforcement Learning 1/2</h3>
           <p><em>Agent</em> in an <em>environment</em> wants to max its cumulative <em>reward</em></p>
           <p>Learns through trial and error (no labels, just reward)</p>
-          <p>Reward is often sparse and delayed</p>
           <p>Formulation: Set of states $S$ and set of actions $A$</p>
           <p>Policy $\pi$ determines action $\mathbf{a}_t$ to perform given the state $\mathbf{s}_t$</p>
-          <p>Action $\mathbf{a}_t$ transitions $\mathbf{s}_t$ to $\mathbf{s}_{t+1}$ with scalar reward $r_{t+1}$</p>
+          <figure>
+            <img src="agent_environment.png" style="background: #fff;">
+            <figcaption>Action $\mathbf{a}_t$ transitions $\mathbf{s}_t$ to $\mathbf{s}_{t+1}$ with scalar reward $r_{t+1}$ [1]</figcaption>
+          </figure>
         </section>
 
         <section>
           <h3>Reinforcement Learning 2/2</h3>
-          <p>Problem may terminate (<em>episodic</em>), or not ($T = \infty$)</p>
           <p>Cumulative reward is called the return $R = \sum\limits_{t=1}^T \gamma^{t-1}r_t$</p>
+          <p>Problem may terminate (<em>episodic</em>), or not ($T = \infty$)</p>
           <p>Discount $\gamma$ in $[0, 1)$ makes future events less important</p>
           <p>Goal: Maximise expected return given policy $\mathbb{E}[R|\pi]$</p>
         </section>
@@ -77,20 +77,41 @@
         </section>
 
         <section>
-          <h3>Function Approximation + NNs</h3>
+          <h3>Function Approximation</h3>
           <p>Impractical to implement a lookup table for large $S$ or $A$</p>
-          <p>TD-Gammon</p>
-          <p>Neural fitted Q-iteration</p>
+          <p>Use powerful function approximators, e.g. neural networks</p>
+          <p>Neural networks have been used in RL since the 80s [2]</p>
+          <p>Famous: TD-Gammon, using TD($\lambda$) algorithm [3]</p>
+          <p>Neural fitted Q-iteration [4] used offline updates [5]</p>
         </section>
 
         <section>
-          <h3>Deep Q-Networks</h3>
-          <p>$S$ can be large and continuous, but $A$ must be discrete</p>
+          <h3>Experience Replay</h3>
+          <p>Store experience in memory to train on (offline) [5]</p>
+          <p>Following is DQN implementation [6]:
+            <ul>
+              <li>Transitions $(\mathbf{s}_t, a_t, r_{t+1}, \mathbf{s}_{t+1})$ stored in a (circular) buffer</li>
+              <li>Uniformly sample and perform Q-learning</li>
+            </ul>
+          </p>
+          <p>Data-efficient and can use minibatch updates</p>
+          <p>Breaks strong temporal correlations from sampling online</p>
+        </section>
+
+        <section>
+          <h3>Deep Q-Networks 1/2</h3>
+          <figure>
+            <img src="dqn.jpg">
+            <figcaption>Don't input $a_t$, output $Q(\mathbf{s}, a)\ \forall a\in A$ [6]</figcaption>
+          </figure>
           <p>Process screen with standard convolutional layers</p>
-          <p>Don't input $a_t$, output $Q(\mathbf{s}, a)\ \forall a\in A$</p>
+        </section>
+
+        <section>
+          <h3>Deep Q-Networks 2/2</h3>
           <p>Efficient - one forward pass for all Q-values</p>
           <p>Utilises same learnt spatial representations</p>
-          <p>Two more additions to boost performance...</p>
+          <p>$S$ can be large and continuous, but $A$ must be discrete</p>
         </section>
 
         <section>
@@ -103,55 +124,82 @@
         </section>
 
         <section>
-          <h3>Experience Replay</h3>
-          <p>"Neuro-inspired" mechanism for replaying memories</p>
-          <p>Store $(\mathbf{s}_t, a_t, r_{t+1}, \mathbf{s}_{t+1})$ transitions in a (circular) buffer</p>
-          <p>Uniformly sample and perform Q-learning</p>
-          <p>Data-efficient and can use minibatch updates</p>
-          <p>Breaks strong temporal correlations from sampling online</p>
+          <h3>Results</h3>
+          <figure>
+            <img src="results.jpg">
+            <figcaption>Better than a non-expert human on many games [6]</figcaption>
+          </figure>
         </section>
 
         <section>
           <h3>Double-Q Learning</h3>
           <p>Policy network acts, but target network estimates $V(\mathbf{s}_{t+1})$</p>
           <p>Better estimate if policy network picks $\arg\!\max$ action</p>
-          <p>Target network then estimates value with chosen action</p>
+          <p>Target network then estimates value with chosen action [7]</p>
           <p>$Y_{DQN} = r_{t+1} + \gamma Q(\mathbf{s}_{t+1}, \arg\!\max\limits_a[Q(\mathbf{s}_{t+1}, a; \theta_{target})]; \theta_{target})$</p>
           <p>$Y_{DDQN} = r_{t+1} + \gamma Q(\mathbf{s}_{t+1}, \arg\!\max\limits_a[Q(\mathbf{s}_{t+1}, a; \theta_{policy})]; \theta_{target})$</p>
         </section>
 
         <section>
-          <h3>Advantage Learning???</h3>
-          <p>Advantage function $Adv(\mathbf{s}, \mathbf{a}) = Q(\mathbf{s}, \mathbf{a}) - V(\mathbf{s})$</p>
+          <h3>Advantage Updating</h3>
+          <p>Advantage function $Adv(\mathbf{s}, \mathbf{a}) = Q(\mathbf{s}, \mathbf{a}) - V(\mathbf{s})$ [8]</p>
           <p>$V$ represents importance of being in state $\mathbf{s}$</p>
           <p>$Q$ evaluates importance of different actions chosen from $\mathbf{s}$</p>
           <p>Thus $Adv$ provides a relative measure of actions in $\mathbf{s}$</p>
         </section>
 
         <section>
-          <h3>Dueling Architecture</h3>
+          <h3>Dueling Network Architecture 1/2</h3>
           <p>Insight is that sometimes actions don't matter so much</p>
           <p>For bootstrapping in RL, a good estimate of $V$ helps</p>
-          <p>Therefore decouple into <em>value</em> and <em>advantage</em> streams</p>
-          <img src="duel.png">
+          <figure>
+            <img src="duel.png">
+            <figcaption>Therefore decouple into <em>value</em> and <em>advantage</em> streams [9]</figcaption>
+          </figure>
         </section>
 
         <section>
-          <h3>Dueling Architecture 2/2</h3>
-          <p>Function built into the architecture (e.g. ResNets)</p>
-          <p>Can visualise what triggers activations in both streams</p>
-          <video src="enduro.mp4" loop data-autoplay></video>
+          <h3>Dueling Network Architecture 2/2</h3>
+          <p>Function built into the architecture (e.g. ResNets [10])</p>
+          <figure>
+            <video src="enduro.mp4" loop data-autoplay></video>
+            <figcaption>Can visualise what triggers activations in both streams [11]</figcaption>
+          </figure>
         </section>
 
         <section>
-          <h3>Criticism</h3>
-          <p>Shallow reinforcement learning</p>
+          <h3>Shallow Reinforcement Learning</h3>
+          <p>Several DQN "biases" used to improve "shallow" agents [12]</p>
+          <p>Spatially invariant features (relative, not absolute distance)</p>
+          <p>Non-Markovian features (stack frames)</p>
+          <p>Object detection (group pixels)</p>
+          <p>Together allows competitive performance with linear agents</p>
+        </section>
+
+        <section>
+          <h3>Conclusion</h3>
+          <p>Impressive results overall</p>
+          <p>Applying old techniques to DL improves performance</p>
+          <p>Distribution also improves performance [13]</p>
+          <p>Long-term dependencies are still an open problem</p>
         </section>
 
         <section>
           <h2>References</h2>
-          <ol>
-            <li></li>
+          <ol style="font-size: 0.45em;">
+            <li>Sutton, R. S., &amp; Barto, A. G. (1998). <em>Reinforcement learning: An introduction</em> (Vol. 1, No. 1). Cambridge: MIT press.</li>
+            <li>Schmidhuber, J. (2015). Deep learning in neural networks: An overview. <em>Neural Networks, 61</em>, 85-117.</li>
+            <li>Tesauro, G. (1994). TD-Gammon, a self-teaching backgammon program, achieves master-level play. <em>Neural computation, 6</em>(2), 215-219.</li>
+            <li>Riedmiller, M. (2005). Neural fitted Q iteration–first experiences with a data efficient neural reinforcement learning method. In <em>Machine Learning: ECML 2005</em> (pp. 317-328). Springer Berlin Heidelberg.</li>
+            <li>Lin, L. J. (1992). Self-improving reactive agents based on reinforcement learning, planning and teaching. <em>Machine learning, 8</em>(3-4), 293-321.</li>
+            <li>Mnih, V., Kavukcuoglu, K., Silver, D., Rusu, A. A., Veness, J., Bellemare, M. G., ... &amp; Petersen, S. (2015). Human-level control through deep reinforcement learning. <em>Nature, 518</em>(7540), 529-533.</li>
+            <li>Van Hasselt, H., Guez, A., &amp; Silver, D. (2015). Deep reinforcement learning with double Q-learning. <em>arXiv preprint arXiv:1509.06461</em>.</li>
+            <li>Baird III, L. C. (1993). <em>Advantage updating</em> (No. WL-TR-93-1146). WRIGHT LAB WRIGHT-PATTERSON AFB OH.</li>
+            <li>Wang, Z., de Freitas, N., &amp; Lanctot, M. (2015). Dueling Network Architectures for Deep Reinforcement Learning. <em>arXiv preprint arXiv:1511.06581</em>.</li>
+            <li>He, K., Zhang, X., Ren, S., &amp; Sun, J. (2015). Deep Residual Learning for Image Recognition. <em>arXiv preprint arXiv:1512.03385</em>.</li>
+            <li>Simonyan, K., Vedaldi, A., &amp; Zisserman, A. (2013). Deep inside convolutional networks: Visualising image classification models and saliency maps. <em>arXiv preprint arXiv:1312.6034</em>.</li>
+            <li>Liang, Y., Machado, M. C., Talvitie, E., &amp; Bowling, M. (2015). State of the Art Control of Atari Games Using Shallow Reinforcement Learning. <em>arXiv preprint arXiv:1512.01563</em>.</li>
+            <li>Nair, A., Srinivasan, P., Blackwell, S., Alcicek, C., Fearon, R., De Maria, A., ... &amp; Legg, S. (2015). Massively parallel methods for deep reinforcement learning. <em>arXiv preprint arXiv:1507.04296</em>.</li>
           </ol>
 
           <p>All images/videos © Atari, Inc. and Google DeepMind</p>
