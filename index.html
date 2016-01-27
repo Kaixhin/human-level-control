@@ -96,6 +96,7 @@
           </p>
           <p>Data-efficient and can use minibatch updates</p>
           <p>Breaks strong temporal correlations from sampling online</p>
+          <p>Similar to planning/learning a model [7]</p>
         </section>
 
         <section>
@@ -136,14 +137,14 @@
           <h3>Double-Q Learning</h3>
           <p>Policy network acts, but target network estimates $V(\mathbf{s}_{t+1})$</p>
           <p>Better estimate if policy network picks $\arg\!\max$ action</p>
-          <p>Target network then estimates value with chosen action [7]</p>
+          <p>Target network then estimates value with chosen action [8]</p>
           <p>$Y_{DQN} = r_{t+1} + \gamma Q(\mathbf{s}_{t+1}, \arg\!\max\limits_a[Q(\mathbf{s}_{t+1}, a; \theta_{target})]; \theta_{target})$</p>
           <p>$Y_{DDQN} = r_{t+1} + \gamma Q(\mathbf{s}_{t+1}, \arg\!\max\limits_a[Q(\mathbf{s}_{t+1}, a; \theta_{policy})]; \theta_{target})$</p>
         </section>
 
         <section>
           <h3>Advantage Updating</h3>
-          <p>Advantage function $Adv(\mathbf{s}, \mathbf{a}) = Q(\mathbf{s}, \mathbf{a}) - V(\mathbf{s})$ [8]</p>
+          <p>Advantage function $Adv(\mathbf{s}, \mathbf{a}) = Q(\mathbf{s}, \mathbf{a}) - V(\mathbf{s})$ [9]</p>
           <p>$V$ represents importance of being in state $\mathbf{s}$</p>
           <p>$Q$ evaluates importance of different actions chosen from $\mathbf{s}$</p>
           <p>Thus $Adv$ provides a relative measure of actions in $\mathbf{s}$</p>
@@ -155,22 +156,22 @@
           <p>For bootstrapping in RL, a good estimate of $V$ helps</p>
           <figure>
             <img src="duel.png">
-            <figcaption>Therefore decouple into <em>value</em> and <em>advantage</em> streams [9]</figcaption>
+            <figcaption>Therefore decouple into <em>value</em> and <em>advantage</em> streams [10]</figcaption>
           </figure>
         </section>
 
         <section>
           <h3>Dueling Network Architecture 2/2</h3>
-          <p>Function built into the architecture (e.g. ResNets [10])</p>
+          <p>Function built into the architecture (e.g. ResNets [11])</p>
           <figure>
             <video src="enduro.mp4" poster="enduro.png" loop data-autoplay></video>
-            <figcaption>Can visualise what triggers activations in both streams [11]</figcaption>
+            <figcaption>Can visualise what triggers activations in both streams [12]</figcaption>
           </figure>
         </section>
 
         <section>
           <h3>Shallow Reinforcement Learning</h3>
-          <p>Several DQN "biases" used to improve "shallow" agents [12]</p>
+          <p>Several DQN "biases" used to improve "shallow" agents [13]</p>
           <p>Spatially invariant features (relative, not absolute distance)</p>
           <p>Non-Markovian features (stack frames)</p>
           <p>Object detection (group pixels)</p>
@@ -181,7 +182,7 @@
           <h3>Conclusion</h3>
           <p>Impressive results overall</p>
           <p>Applying old techniques to DL improves performance</p>
-          <p>Distribution also improves performance [13]</p>
+          <p>Distribution also improves performance [14]</p>
           <p>Long-term dependencies are still an open problem</p>
         </section>
 
@@ -194,6 +195,7 @@
             <li>Riedmiller, M. (2005). Neural fitted Q iteration–first experiences with a data efficient neural reinforcement learning method. In <em>Machine Learning: ECML 2005</em> (pp. 317-328). Springer Berlin Heidelberg.</li>
             <li>Lin, L. J. (1992). Self-improving reactive agents based on reinforcement learning, planning and teaching. <em>Machine learning, 8</em>(3-4), 293-321.</li>
             <li>Mnih, V., Kavukcuoglu, K., Silver, D., Rusu, A. A., Veness, J., Bellemare, M. G., ... &amp; Petersen, S. (2015). Human-level control through deep reinforcement learning. <em>Nature, 518</em>(7540), 529-533.</li>
+            <li>van Seijen, H., &amp; Sutton, R. S. (2015) A Deeper Look at Planning as Learning from Replay. In <em>International Conference on Machine Learning, 2015</em>.</li>
             <li>Van Hasselt, H., Guez, A., &amp; Silver, D. (2015). Deep reinforcement learning with double Q-learning. <em>arXiv preprint arXiv:1509.06461</em>.</li>
             <li>Baird III, L. C. (1993). <em>Advantage updating</em> (No. WL-TR-93-1146). WRIGHT LAB WRIGHT-PATTERSON AFB OH.</li>
             <li>Wang, Z., de Freitas, N., &amp; Lanctot, M. (2015). Dueling Network Architectures for Deep Reinforcement Learning. <em>arXiv preprint arXiv:1511.06581</em>.</li>
