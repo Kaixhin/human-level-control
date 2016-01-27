@@ -54,7 +54,7 @@
         <section>
           <h3>Reinforcement Learning 2/2</h3>
           <p>Cumulative reward is called the return $R = \sum\limits_{t=1}^T \gamma^{t-1}r_t$</p>
-          <p>Problem may terminate (<em>episodic</em>), or not ($T = \infty$)</p>
+          <p>Problem may be <em>episodic</em> ($T \in \mathbb{N}$), or <em>continuing</em> ($T = \infty$)</p>
           <p>Discount $\gamma$ in $[0, 1)$ makes future events less important</p>
           <p>Goal: Maximise expected return given policy $\mathbb{E}[R|\pi]$</p>
         </section>
@@ -105,6 +105,7 @@
             <figcaption>Don't input $a_t$, output $Q(\mathbf{s}, a)\ \forall a\in A$ [6]</figcaption>
           </figure>
           <p>Process screen with standard convolutional layers</p>
+          <p>Q-learning with $\epsilon$-greedy policy</p>
         </section>
 
         <section>
