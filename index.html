@@ -43,7 +43,7 @@
           <h3>Reinforcement Learning 1/2</h3>
           <p><em>Agent</em> in an <em>environment</em> wants to max its cumulative <em>reward</em></p>
           <p>Learns through trial and error (no labels, just reward)</p>
-          <p>Formulation: Set of states $S$ and set of actions $A$</p>
+          <p>Formulation: Set of states $\mathcal{S}$ and set of actions $\mathcal{A}$</p>
           <p>Policy $\pi$ determines action $\mathbf{a}_t$ to perform given the state $\mathbf{s}_t$</p>
           <figure>
             <img src="agent_environment.png" style="background: #fff;">
@@ -103,7 +103,7 @@
           <h3>Deep Q-Networks 1/2</h3>
           <figure>
             <img src="dqn.jpg">
-            <figcaption>Don't input $a_t$, output $Q(\mathbf{s}, a)\ \forall a\in A$ [6]</figcaption>
+            <figcaption>Don't input $a_t$, output $Q(\mathbf{s}, a)\ \forall a\in \mathcal{A}$ [6]</figcaption>
           </figure>
           <p>Process screen with standard convolutional layers</p>
           <p>Q-learning with $\epsilon$-greedy policy</p>
@@ -113,7 +113,7 @@
           <h3>Deep Q-Networks 2/2</h3>
           <p>Efficient - one forward pass for all Q-values</p>
           <p>Utilises same learnt spatial representations</p>
-          <p>$S$ can be large and continuous, but $A$ must be discrete</p>
+          <p>$\mathcal{S}$ can be large and continuous, but $\mathcal{A}$ must be discrete</p>
         </section>
 
         <section>
@@ -144,10 +144,10 @@
 
         <section>
           <h3>Advantage Updating</h3>
-          <p>Advantage function $Adv(\mathbf{s}, \mathbf{a}) = Q(\mathbf{s}, \mathbf{a}) - V(\mathbf{s})$ [9]</p>
+          <p>Advantage function $A(\mathbf{s}, \mathbf{a}) = Q(\mathbf{s}, \mathbf{a}) - V(\mathbf{s})$ [9]</p>
           <p>$V$ represents importance of being in state $\mathbf{s}$</p>
           <p>$Q$ evaluates importance of different actions chosen from $\mathbf{s}$</p>
-          <p>Thus $Adv$ provides a relative measure of actions in $\mathbf{s}$</p>
+          <p>Thus $A$ provides a relative measure of actions in $\mathbf{s}$</p>
         </section>
 
         <section>
